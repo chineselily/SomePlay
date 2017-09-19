@@ -1,0 +1,4 @@
+挂载GuideManager到物体上
+GuideBtnTest为按钮脚本示例文件
+通过修改GuideManger上的target进入到下一步步骤
+同时设置maskPop（可以为null，提示的UIPrefab）
