@@ -20,6 +20,7 @@ public class PlayWebCam : MonoBehaviour {
             webcamTexture = new WebCamTexture(1280, 720);
         } else if (devices.Length > 1) {
             webcamTexture = new WebCamTexture("Logitech HD Pro Webcam C920", 1280, 720);
+            
         }
 #else
         webcamTexture = new WebCamTexture(720, 405);

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DroneFly : MonoBehaviour {
+public class MoveForwardByKeyboard : MonoBehaviour {
 
     public float speed = 10.0F;
     void Update() {
