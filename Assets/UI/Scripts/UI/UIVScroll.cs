@@ -11,6 +11,8 @@ public class UIVScroll : TTUIPage {
 
     public override void Awake(GameObject go) {
 
+        Debug.Log(this.gameObject.name);
+
         for(int i = 0;i < 6; i++) {
             var btn = new GameObject();
             btn.transform.SetParent(this.gameObject.transform.Find("Layout"));
