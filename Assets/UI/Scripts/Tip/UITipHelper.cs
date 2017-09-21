@@ -127,8 +127,9 @@ class UITipData
     public void ClosePage()
     {
         uiPage.type.ToString();
+        string ttype = uiPage.GetType().ToString();
         if (1 == createMode)
-            TTUIPage.ClosePage(uiPage.type.ToString());
+            TTUIPage.ClosePage(ttype);
         else if (2 == createMode)
         {
             uiPage.Hide();
