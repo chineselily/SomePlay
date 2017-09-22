@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class RandomStrategy
 {
-    public static void Create(RandomCreater randomCreater)
+    public static List<RandomCellData> Create(RandomCreater randomCreater)
     {
-        if (null == randomCreater) return;
-        List<RandomCellData> listData = new List<RandomCellData>();
+        if (null == randomCreater) return null;
+        List<RandomCellData> listData = null == randomCreater.randomObjects ? new List<RandomCellData>() : randomCreater.randomObjects;
         RandomCellData tData;
         Vector3 tv = Vector3.zero;
-        for(int i=0;i<randomCreater.maxNum;)
+        for(int i=0;i<randomCreater.needCreateNum;)
         {
             tv.x = UnityEngine.Random.Range(randomCreater.minPosition.x, randomCreater.maxPosition.x);
             tv.y = UnityEngine.Random.Range(randomCreater.minPosition.y, randomCreater.maxPosition.y);
@@ -20,11 +20,11 @@ public class RandomStrategy
             {
                 i += 1;
                 tData = new RandomCellData();
-                tData.Create(randomCreater.prefabToCreate, randomCreater.transform, tv, randomCreater.prefabToCreate.name + i);
+                tData.Create(randomCreater.prefabToCreate, randomCreater.transform, tv, randomCreater.prefabToCreate.name + i, randomCreater.prefabRotation);
                 listData.Add(tData);
             }
         }
-        randomCreater.randomObjects = listData;
+        return listData;
     }
 
     public static bool isValidCell(List<RandomCellData> listData, Vector3 checkPosition, float minDistance)
