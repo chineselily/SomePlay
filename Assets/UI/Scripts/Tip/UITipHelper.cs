@@ -53,7 +53,7 @@ class UITipPageData
     public TTUIPage ShowTip<T>() where T : TTUIPage, new()
     {
         TTUIPage tpage = null;
-        if (maxNum > 0 && curNum >= maxNum)
+        if (maxNum > 0 && tips.Count >= maxNum)
             tpage = tips[0].uiPage;
         else
             tpage = CreateNew<T>();
@@ -85,8 +85,8 @@ class UITipPageData
             TTUIPage tpage = new T();
             tpage.gameObject =
             Lean.LeanPool.Spawn(page.gameObject, page.transform.localPosition, page.transform.localRotation, page.transform.parent);
-            tpage.transform = page.gameObject.transform;
-            tpage.Awake(page.gameObject);
+            tpage.transform = tpage.gameObject.transform;
+            tpage.Awake(tpage.gameObject);
             tpage.Active();
             tpage.Refresh();
             createMode = 2;
