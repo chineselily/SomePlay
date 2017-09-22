@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ColliderDebuger : MonoBehaviour {
+public class ColliderDespawn : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
+    // Use this for initialization
+    private void Awake()
+    {
+        //Debug.Log("ColliderDebuger-Awake,myname=" + transform.name);
+    }
+    void Start () {
+        //Debug.Log("ColliderDebuger-start,myname=" + transform.name);
 	}
 	
 	// Update is called once per frame
@@ -16,6 +20,7 @@ public class ColliderDebuger : MonoBehaviour {
 
     public void OnCollisionEnter(Collision collision)
     {
+        Despawn();
         Debug.Log("OnCollisionEnter, myname="+transform.name+" collision.name="+collision.transform.name);
     }
 
@@ -26,11 +31,17 @@ public class ColliderDebuger : MonoBehaviour {
 
     public void OnTriggerEnter(Collider other)
     {
+        Despawn();
         Debug.Log("OnTriggerEnter, myname=" + transform.name + " Collider.name=" + other.transform.name);
     }
 
     public void OnTriggerStay(Collider other)
     {
-        
+
+    }
+
+    private void Despawn()
+    {
+        Lean.LeanPool.Despawn(gameObject);
     }
 }

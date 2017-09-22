@@ -21,13 +21,14 @@ public class RandomStrategy
                 i += 1;
                 tData = new RandomCellData();
                 tData.Create(randomCreater.prefabToCreate, randomCreater.transform, tv, randomCreater.prefabToCreate.name + i, randomCreater.prefabRotation);
+                AddColliderCheck(tData.cellObject);
                 listData.Add(tData);
             }
         }
         return listData;
     }
 
-    public static bool isValidCell(List<RandomCellData> listData, Vector3 checkPosition, float minDistance)
+    private static bool isValidCell(List<RandomCellData> listData, Vector3 checkPosition, float minDistance)
     {
         if (null == listData || listData.Count <= 0) return true;
         Vector3 tposition;
@@ -37,5 +38,18 @@ public class RandomStrategy
             if (Mathf.Abs(tposition.x - checkPosition.x) + Mathf.Abs(tposition.y - checkPosition.y) + Mathf.Abs(tposition.z - checkPosition.z) < minDistance) return false;
         }
         return true;
+    }
+
+    private static void AddColliderCheck(GameObject go)
+    {
+        if (null == go || go.GetComponent<Collider>() == null) return;
+        if(go.GetComponent<Rigidbody>()==null)
+        {
+            Rigidbody tr = go.AddComponent<Rigidbody>();
+            tr.isKinematic = false;
+            tr.useGravity = false;
+        }
+        if (go.GetComponent<ColliderDespawn>() == null)
+            go.AddComponent<ColliderDespawn>();
     }
 }

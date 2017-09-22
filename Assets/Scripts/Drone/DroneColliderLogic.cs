@@ -14,7 +14,8 @@ public class DroneColliderLogic : MonoBehaviour {
     {
         if(other.tag == "coin")
         {
-            Lean.LeanPool.Despawn(other);
+            if(other.GetComponent<ColliderDespawn>() == null)
+                Lean.LeanPool.Despawn(other);
             (UITipHelper.ShowTip<TipNumber>() as TipNumber).SetNumber(1);
         }
         else

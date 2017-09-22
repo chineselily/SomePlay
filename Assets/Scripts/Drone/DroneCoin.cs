@@ -31,8 +31,6 @@ public class DroneCoin : MonoBehaviour {
                     tcell.cellObject.AddComponent<Spin>();
                     tcell.cellObject.GetComponent<Spin>().rotationsPerSecond = new Vector3(0, 0, 0.1f);
                 }
-                if (tcell.cellObject.GetComponent<ColliderDebuger>() == null)
-                    tcell.cellObject.AddComponent<ColliderDebuger>();
             }
         }
     }
