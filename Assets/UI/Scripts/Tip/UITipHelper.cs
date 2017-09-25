@@ -7,11 +7,11 @@ using System;
 public class UITipHelper
 {
     private static Dictionary<string, UITipPageData> mallTips;
-    public static TTUIPage ShowTip<T>(int maxNum=-1) where T : TTUIPage, new()
+    public static TTUIPage ShowTip<T>(Vector3 screenPosition = default(Vector3), int maxNum = -1) where T : TTUIPage, new()
     {
         Type t = typeof(T);
         string pageName = t.ToString();
-        return GetPageData(pageName, maxNum).ShowTip<T>();
+        return GetPageData(pageName, maxNum).ShowTip<T>(screenPosition);
     }
     public static void CloseTip<T>()where T:TTUIPage, new()
     {
@@ -50,7 +50,7 @@ class UITipPageData
         tips = new List<UITipData>();
     }
 
-    public TTUIPage ShowTip<T>() where T : TTUIPage, new()
+    public TTUIPage ShowTip<T>(Vector3 screenPosition = default(Vector3)) where T : TTUIPage, new()
     {
         TTUIPage tpage = null;
         if (maxNum > 0 && tips.Count >= maxNum)
@@ -58,6 +58,7 @@ class UITipPageData
         else
             tpage = CreateNew<T>();
 
+        tpage.transform.localPosition = screenPosition;
         curNum += 1;
         return tpage;
     }

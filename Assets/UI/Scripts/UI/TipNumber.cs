@@ -33,12 +33,13 @@ public class TipNumber : TTUIPage
     private void DoTween(bool bUp)
     {
         //Debug.Log("DoTween-bUp=" + bUp + "-InitPosition" + InitPosition);
-        transform.localPosition = InitPosition;
+        //transform.localPosition = InitPosition;
+        transform.GetComponent<CanvasGroup>().alpha = 1;
 
         Sequence mySequence = DOTween.Sequence();
-        float ty = bUp ? 60 : -60;
+        float ty = bUp ? transform.localPosition.y+150 : transform.localPosition.y-150;
 
-        mySequence.Append(transform.DOLocalMoveY(InitPosition.y + ty, 1)).AppendInterval(0.5f);
+        mySequence.Append(transform.DOLocalMoveY(ty, 1)).Append(transform.GetComponent<CanvasGroup>().DOFade(0, 1));
         //mySequence.AppendInterval(1);
         mySequence.OnComplete(DoTweenEnd);
     }

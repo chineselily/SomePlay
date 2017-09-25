@@ -12,11 +12,12 @@ public class DroneColliderLogic : MonoBehaviour {
     }
     private void OnTriggerEnter(Collider other)
     {
+
         if(other.tag == "coin")
         {
             if(other.GetComponent<ColliderDespawn>() == null)
                 Lean.LeanPool.Despawn(other);
-            (UITipHelper.ShowTip<TipNumber>() as TipNumber).SetNumber(1);
+            (UITipHelper.ShowTip<TipNumber>(MathUtil.WorldToTTUIPosition(other.transform.position)) as TipNumber).SetNumber(1);
         }
         else
         {
