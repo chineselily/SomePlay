@@ -13,17 +13,21 @@ public class DroneColliderLogic : MonoBehaviour {
     private void OnTriggerEnter(Collider other)
     {
 
-        if(other.tag == "coin")
+        if(other.tag == DroneMapLogic.coin)
         {
-            if(other.GetComponent<ColliderDespawn>() == null)
-                Lean.LeanPool.Despawn(other);
-            (UITipHelper.ShowTip<TipNumber>(MathUtil.WorldToTTUIPosition(other.transform.position)) as TipNumber).SetNumber(1);
+            int number = DroneMapLogic.instance.addScore;
+            (UITipHelper.ShowTip<TipNumber>(MathUtil.WorldToTTUIPosition(other.transform.position)) as TipNumber).SetNumber(number);
+        }
+        else if(other.tag == DroneMapLogic.treasure)
+        {
+            DroneMapLogic.instance.AddBuffer(System.DateTime.Now.Second);
         }
         else
         {
             if (null != myVibrate)
                 myVibrate.Vibrate();
-            (UITipHelper.ShowTip<TipNumber>() as TipNumber).SetNumber(-1);
+            int number = DroneMapLogic.instance.reduceScore;
+            (UITipHelper.ShowTip<TipNumber>() as TipNumber).SetNumber(-number);
         }
     }
     void Start () {

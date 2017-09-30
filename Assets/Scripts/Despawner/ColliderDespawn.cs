@@ -21,7 +21,7 @@ public class ColliderDespawn : MonoBehaviour {
     public void OnCollisionEnter(Collision collision)
     {
         Despawn();
-        Debug.Log("OnCollisionEnter, myname="+transform.name+" collision.name="+collision.transform.name);
+        //Debug.Log("OnCollisionEnter, myname="+transform.name+" collision.name="+collision.transform.name);
     }
 
     public void OnCollisionStay(Collision collision)
@@ -32,7 +32,7 @@ public class ColliderDespawn : MonoBehaviour {
     public void OnTriggerEnter(Collider other)
     {
         Despawn();
-        Debug.Log("OnTriggerEnter, myname=" + transform.name + " Collider.name=" + other.transform.name);
+        //Debug.Log("OnTriggerEnter, myname=" + transform.name + " Collider.name=" + other.transform.name);
     }
 
     public void OnTriggerStay(Collider other)
@@ -42,6 +42,8 @@ public class ColliderDespawn : MonoBehaviour {
 
     private void Despawn()
     {
+        if (!gameObject.activeSelf) return;
         Lean.LeanPool.Despawn(gameObject);
+        Debug.Log("Despawn, myname=" + transform.name + " active=" + gameObject.activeSelf + " localpo="+transform.localPosition);
     }
 }
