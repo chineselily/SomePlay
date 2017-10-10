@@ -60,19 +60,21 @@ public class ScrollToNeighborParam
     public bool bSameAsBeforeItem;
     public float duration;
     public Sequence sequece;
+    public ItemScrollToNeighborDatas datas;
     public List<GameObject> curScrollItems;
     public List<Vector3> curScrollPositions;
     public List<Vector3> curScrollLocalScales;
 
-    OutMaskRefereceInfo beforeOutMaskInfo;
-    OutMaskRefereceInfo afterOutMaskInfo;
-    List<Vector3> initScrollItemsLocalPosition;
-    List<Vector3> initScrollItemsLocalScale;
-    List<int> initScrollItemsSiblingIndex;
+    public OutMaskRefereceInfo beforeOutMaskInfo;
+    public OutMaskRefereceInfo afterOutMaskInfo;
+    public List<Vector3> initScrollItemsLocalPosition;
+    public List<Vector3> initScrollItemsLocalScale;
+    public List<int> initScrollItemsSiblingIndex;
+    public List<GameObject> initItems;
 
-    List<GameObject> visibleItems;
-    List<GameObject> beforeItems;
-    List<GameObject> afterItems;
+    public List<GameObject> visibleItems;
+    public List<GameObject> beforeItems;
+    public List<GameObject> afterItems;
     public void InitScrollItems(List<GameObject> tlist, GameObject beforeReference, GameObject afterReference)
     {
         if (null == tlist) return;
@@ -94,6 +96,7 @@ public class ScrollToNeighborParam
         curScrollPositions = new List<Vector3>();
 
         visibleItems = new List<GameObject>(tlist);
+        initItems = new List<GameObject>(tlist);
         initScrollItemsSiblingIndex = new List<int>();
         initScrollItemsLocalScale = new List<Vector3>();
         initScrollItemsLocalPosition = new List<Vector3>();
@@ -105,7 +108,11 @@ public class ScrollToNeighborParam
             initScrollItemsLocalScale.Add(visibleItems[i].transform.localScale);
         }
     }
-    
+    public bool havaData(GameObject titem)
+    {
+        if (null == datas) return true;
+        return datas.haveData(titem);
+    }
     public bool canScroll(int minItemNum)
     {
         int curNum = 0;
